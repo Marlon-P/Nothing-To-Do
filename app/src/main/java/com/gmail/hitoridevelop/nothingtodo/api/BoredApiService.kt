@@ -5,7 +5,7 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
-import retrofit2.http.Path
+import retrofit2.http.Url
 
 
 private const val BASE_URL =
@@ -26,8 +26,8 @@ interface BoredApiService {
     @GET("activity")
     suspend fun getRandomActivity(): BoredApiResponse
 
-    @GET("activity?type={type}")
-    suspend fun getType(@Path("type") type: String): BoredApiResponse
+    @GET
+    suspend fun customActivity(@Url url: String): BoredApiResponse
 }
 
 object BoredApi {

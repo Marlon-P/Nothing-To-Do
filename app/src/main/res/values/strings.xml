@@ -1,3 +1,48 @@
 <resources>
     <string name="app_name">Nothing To Do</string>
+    <string name="type_of_activity">Type of Activity</string>
+    <string name="accessibility">Accessibility Level</string>
+    <string name="participants">Participants</string>
+    <string name="price">Price Range</string>
+    <string name="tell_me_what_to_do">Tell Me What to Do</string>
+    <string name="save_activity_for_later">Save Activity for Later</string>
+    <string name="suggest_new_activity">Suggest New Activity</string>
+
+    <string-array name="type_of_activities_array">
+        <item>Any</item>
+        <item>Education</item>
+        <item>Recreational</item>
+        <item>Study</item>
+        <item>Diy</item>
+        <item>Charity</item>
+        <item>Cooking</item>
+        <item>Relaxation</item>
+        <item>Music</item>
+        <item>Busywork</item>
+    </string-array>
+
+    <string-array name="accessibility_array">
+        <item>Any</item>
+        <item>Completely Accessible</item>
+        <item>Limited Accessibility</item>
+        <item>Poor Accessibility</item>
+    </string-array>
+
+    <string-array name="participants_array">
+        <item>Any</item>
+        <item>1 person</item>
+        <item>2 – 4 people</item>
+        <item>5 or more people</item>
+    </string-array>
+
+    <string-array name="price_array">
+        <item>Any</item>
+        <item>Free</item>
+        <item>Inexpensive</item>
+        <item>Expensive</item>
+    </string-array>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="read_a_novel">Read a novel</string>
+
 </resources>
