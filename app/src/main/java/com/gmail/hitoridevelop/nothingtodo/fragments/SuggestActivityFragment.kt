@@ -208,7 +208,9 @@ class SuggestActivityFragment : Fragment(), AdapterView.OnItemSelectedListener  
                     withContext(Dispatchers.Main){
 
 
-                        val bundle = bundleOf("bundleKey" to response.activity)
+                        val activity = if (response.activity.isNullOrEmpty()) "No activity found based on those parameters"
+                        else response.activity
+                        val bundle = bundleOf("bundleKey" to activity)
 
                         view?.findNavController()?.navigate(R.id.action_suggestActivityFragment_to_showActivityFragment, bundle)
                     }
