@@ -105,14 +105,16 @@ class SuggestActivityFragment : Fragment(), AdapterView.OnItemSelectedListener  
 
         binding.button.setOnClickListener {
 
-            /*choices type = any or (the other choices in the spinner)
+            /*choices: type = Any or (the other choices in the spinner)
             * same goes for all the other 3 choices
             * so 4 options with 2 choices each
-            * 16 possible get responses 2 * 2 * 2 * 2*/
+            * 16 possible get calls 2 * 2 * 2 * 2 */
             var useCustomGet = false
             val baseUrl = "https://www.boredapi.com/api/activity?"
-            var url  = "https://www.boredapi.com/api/activity?"
+            var url  = baseUrl
 
+            //if the user chooses a specific type of activity, then use the custom url get instead of the
+            //get that gives a random activity
             if (activityType != "Any") {
                 useCustomGet = true
                 url += "type=${activityType.lowercase()}"
@@ -206,11 +208,10 @@ class SuggestActivityFragment : Fragment(), AdapterView.OnItemSelectedListener  
                         println(e.message)
                     }
                     withContext(Dispatchers.Main){
+                        //println(response.toString())
 
-
-                        val activity = if (response.activity.isNullOrEmpty()) "No activity found based on those parameters"
-                        else response.activity
-                        val bundle = bundleOf("bundleKey" to activity)
+                        val activityArray = arrayOf(response.activity, activityType, accessibility, participants, price)
+                        val bundle = bundleOf("bundleKey" to activityArray)
 
                         view?.findNavController()?.navigate(R.id.action_suggestActivityFragment_to_showActivityFragment, bundle)
                     }

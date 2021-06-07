@@ -3,9 +3,15 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/storage"
-            android:title="@string/saved_activities"
+            android:id="@+id/activities_to_do"
+            android:title="@string/activities_to_do"
             android:icon="@drawable/folder">
+        </item>
+
+        <item
+            android:id="@+id/completed_activities"
+            android:title="@string/finished_activities"
+            android:icon="@drawable/finished">
         </item>
     </group>
 </menu>

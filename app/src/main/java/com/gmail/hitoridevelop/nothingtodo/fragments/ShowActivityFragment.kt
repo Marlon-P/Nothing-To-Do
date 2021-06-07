@@ -15,17 +15,17 @@ import com.gmail.hitoridevelop.nothingtodo.databinding.FragmentShowActivityBindi
 class ShowActivityFragment : Fragment() {
 
 
-    lateinit var binding: FragmentShowActivityBinding
+    private lateinit var binding: FragmentShowActivityBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = FragmentShowActivityBinding.inflate(layoutInflater)
 
-        val result = arguments?.getString("bundleKey")
+        val result = arguments?.getStringArray("bundleKey")
 
 
-        binding.textView.text = result.toString()
+        binding.textView.text = result?.get(0) ?: "No Activity Found"
 
         binding.suggestNewActivityBtn.setOnClickListener {
             view?.findNavController()?.navigate(R.id.action_showActivityFragment_to_suggestActivityFragment)

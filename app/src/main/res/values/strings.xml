@@ -50,5 +50,7 @@
 
     <string name="navigation_drawer_open">Open Nav Drawer</string>
     <string name="navigation_drawer_close">Close Nav Drawer</string>
+    <string name="activities_to_do">Activities to Do</string>
+    <string name="finished_activities">Finished Activities</string>
 
 </resources>
