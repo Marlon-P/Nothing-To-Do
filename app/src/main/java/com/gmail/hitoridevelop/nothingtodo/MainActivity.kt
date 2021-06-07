@@ -11,8 +11,8 @@ import com.google.android.material.navigation.NavigationView
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
 
-    //TODO save data to room db
-    //TODO add are you sure dialog for saving data
+    //[DONE] save data to room db
+    //[DONE] add are you sure dialog for saving data
     //TODO add snack bar when finishing save and add undo function
     //TODO show list of saved activities when clicking the saved folder icon
     //TODO add a filter to the saved activities
@@ -39,8 +39,18 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.activities_to_do -> { Toast.makeText(this, "Do Activity", Toast.LENGTH_SHORT).show() }
-            R.id.completed_activities -> {Toast.makeText(this, "Finished Activities", Toast.LENGTH_SHORT).show()}
+            R.id.home -> {
+                binding.drawerLayout.closeDrawers()
+            }
+            R.id.activities_to_do -> {
+                Toast.makeText(this, "Do Activity", Toast.LENGTH_SHORT).show()
+                binding.drawerLayout.closeDrawers()
+            }
+            R.id.completed_activities -> {
+                Toast.makeText(this, "Finished Activities", Toast.LENGTH_SHORT).show()
+                binding.drawerLayout.closeDrawers()
+
+            }
         }
         return true
     }

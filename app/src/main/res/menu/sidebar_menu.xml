@@ -2,6 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/home"
+            android:title="@string/home"
+            android:icon="@drawable/home">
+        </item>
         <item
             android:id="@+id/activities_to_do"
             android:title="@string/activities_to_do"

@@ -6,7 +6,7 @@ class ActivityRepository(private val activityDao: ActivityDao) {
 
     val getActivities: LiveData<List<Activity>> = activityDao.getActivities()
 
-    fun addActivity(activity: Activity) {
-
+    suspend fun addActivity(activity: Activity) {
+        activityDao.addActivity(activity)
     }
 }
