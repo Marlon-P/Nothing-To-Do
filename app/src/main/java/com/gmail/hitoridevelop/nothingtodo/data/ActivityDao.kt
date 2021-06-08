@@ -17,7 +17,10 @@ interface ActivityDao {
     @Delete
     suspend fun deleteActivity(activity: Activity)
 
-    @Query("SELECT * FROM activities")
-    fun getActivities(): LiveData<List<Activity>>
+    @Query("SELECT * FROM activities WHERE completed = 0")
+    fun getActivitiesToDo(): LiveData<List<Activity>>
+
+    @Query("SELECT * FROM activities WHERE completed = 1")
+    fun getFinishedActivities(): LiveData<List<Activity>>
 
 }

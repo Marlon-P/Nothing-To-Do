@@ -13,8 +13,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     //[DONE] save data to room db
     //[DONE] add are you sure dialog for saving data
-    //TODO add snack bar when finishing save and add undo function
-    //TODO show list of saved activities when clicking the saved folder icon
+    //[DONE] add snack bar when finishing save and add undo function
+    //[DONE] show list of saved activities when clicking the saved folder icon
+    //TODO add loading screen when querying api
+    //TODO add button to complete activity
+    //TODO add separate table for completed activities
+    //TODO add fragment that shows list of completed activities
     //TODO add a filter to the saved activities
     lateinit var binding: ActivityMainBinding
 
@@ -32,24 +36,22 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         binding.drawerLayout.addDrawerListener(toggle)
 
-
-
-
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.home -> {
-                binding.drawerLayout.closeDrawers()
                 binding.myNavHostFragment.findNavController().navigate(R.id.suggestActivityFragment)
+                binding.drawerLayout.closeDrawers()
             }
             R.id.activities_to_do -> {
-                binding.drawerLayout.closeDrawers()
                 binding.myNavHostFragment.findNavController().navigate(R.id.doLaterActivitiesFragment)
-            }
-            R.id.completed_activities -> {
                 binding.drawerLayout.closeDrawers()
 
+            }
+            R.id.completed_activities -> {
+                binding.myNavHostFragment.findNavController().navigate(R.id.completedActivitiesFragment)
+                binding.drawerLayout.closeDrawers()
             }
         }
         return true

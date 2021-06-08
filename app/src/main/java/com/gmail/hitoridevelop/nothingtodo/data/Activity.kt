@@ -19,6 +19,6 @@ data class Activity(
     val type: String,
     val accessibilityRange: String,
     val participantRange: String,
-    val priceRange: String
-
+    val priceRange: String,
+    var completed: Int //0 being false 1 being true
 )

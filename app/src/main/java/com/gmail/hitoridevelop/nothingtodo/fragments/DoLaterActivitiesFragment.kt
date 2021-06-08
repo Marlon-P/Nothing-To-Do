@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.gmail.hitoridevelop.nothingtodo.R
@@ -28,8 +29,11 @@ class DoLaterActivitiesFragment : Fragment(){
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(context)
 
+        val divider = DividerItemDecoration(context, (recyclerView.layoutManager as LinearLayoutManager).layoutDirection)
+        recyclerView.addItemDecoration(divider)
+
         activityViewModel = ViewModelProvider(this).get(ActivityViewModel::class.java)
-        activityViewModel.getActivities.observe(viewLifecycleOwner, { list ->
+        activityViewModel.getActivitiesToDo.observe(viewLifecycleOwner, { list ->
             adapter.setData(list)
         })
         return view

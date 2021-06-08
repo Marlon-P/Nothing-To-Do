@@ -8,13 +8,16 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class ActivityViewModel(application: Application): AndroidViewModel(application) {
-    val getActivities: LiveData<List<Activity>>
+    val getActivitiesToDo: LiveData<List<Activity>>
+    val getFinishedActivities: LiveData<List<Activity>>
+
     private val repository: ActivityRepository
 
     init {
         val activityDao = ActivityDatabase.getDatabase(application).activityDao()
         repository = ActivityRepository(activityDao)
-        getActivities = repository.getActivities
+        getActivitiesToDo = repository.getActivitiesToDo
+        getFinishedActivities = repository.getFinishedActivities
     }
 
     fun addActivity(activity: Activity) {

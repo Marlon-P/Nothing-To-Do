@@ -4,7 +4,8 @@ import androidx.lifecycle.LiveData
 
 class ActivityRepository(private val activityDao: ActivityDao) {
 
-    val getActivities: LiveData<List<Activity>> = activityDao.getActivities()
+    val getFinishedActivities: LiveData<List<Activity>> = activityDao.getFinishedActivities()
+    val getActivitiesToDo: LiveData<List<Activity>> = activityDao.getActivitiesToDo()
 
     suspend fun addActivity(activity: Activity) {
         activityDao.addActivity(activity)

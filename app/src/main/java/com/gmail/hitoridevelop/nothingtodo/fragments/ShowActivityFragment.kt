@@ -67,7 +67,7 @@ class ShowActivityFragment : Fragment() {
 
     private fun insertDataToDatabase() {
                               //Activity name, activity type, accessibility range, participants, price range
-        val activity = Activity(result[0], result[1], result[2], result[3], result[4])
+        val activity = Activity(result[0], result[1], result[2], result[3], result[4], 0)//at first activity is not completed and if added will be added to do later list
         action = activity
         activityViewModel.addActivity(activity)
     }

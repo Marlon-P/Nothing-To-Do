@@ -27,4 +27,8 @@
         android:id="@+id/doLaterActivitiesFragment"
         android:name="com.gmail.hitoridevelop.nothingtodo.fragments.DoLaterActivitiesFragment"
         android:label="DoLaterActivitiesFragment" />
+    <fragment
+        android:id="@+id/completedActivitiesFragment"
+        android:name="com.gmail.hitoridevelop.nothingtodo.fragments.CompletedActivitiesFragment"
+        android:label="CompletedActivitiesFragment" />
 </navigation>
