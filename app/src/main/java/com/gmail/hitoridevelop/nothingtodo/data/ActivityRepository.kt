@@ -14,4 +14,8 @@ class ActivityRepository(private val activityDao: ActivityDao) {
     suspend fun deleteActivity(activity: Activity) {
         activityDao.deleteActivity(activity)
     }
+
+    suspend fun updateActivity(activity: Activity) {
+        activityDao.updateActivity(activity)
+    }
 }

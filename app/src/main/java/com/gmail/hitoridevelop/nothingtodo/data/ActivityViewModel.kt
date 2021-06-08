@@ -32,4 +32,9 @@ class ActivityViewModel(application: Application): AndroidViewModel(application)
         }
     }
 
+    fun updateActivity(activity: Activity) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.updateActivity(activity)
+        }
+    }
 }

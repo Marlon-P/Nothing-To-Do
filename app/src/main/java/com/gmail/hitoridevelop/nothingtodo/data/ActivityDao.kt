@@ -1,10 +1,7 @@
 package com.gmail.hitoridevelop.nothingtodo.data
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 
 /*
     Data Access Object for the Activity class
@@ -22,5 +19,8 @@ interface ActivityDao {
 
     @Query("SELECT * FROM activities WHERE completed = 1")
     fun getFinishedActivities(): LiveData<List<Activity>>
+
+    @Update
+    suspend fun updateActivity(activity: Activity)
 
 }

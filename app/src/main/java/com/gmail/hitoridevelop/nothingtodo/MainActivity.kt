@@ -17,9 +17,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     //[DONE] show list of saved activities when clicking the saved folder icon
     //TODO add loading screen when querying api
     //TODO add button to complete activity
-    //TODO add separate table for completed activities
-    //TODO add fragment that shows list of completed activities
+    //[DONE] add function to get completed activities and unfinished activities
+    //[DONE] add fragment that shows list of completed activities
     //TODO add a filter to the saved activities
+    //TODO add testing
     lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
