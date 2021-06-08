@@ -210,7 +210,7 @@ class SuggestActivityFragment : Fragment(), AdapterView.OnItemSelectedListener  
                     withContext(Dispatchers.Main){
                         //println(response.toString())
 
-                        val activityArray = arrayOf(response.activity, activityType, accessibility, participants, price)
+                        val activityArray = arrayOf(response.activity, response.type, accessibility, participants, price)
                         val bundle = bundleOf("bundleKey" to activityArray)
 
                         view?.findNavController()?.navigate(R.id.action_suggestActivityFragment_to_showActivityFragment, bundle)

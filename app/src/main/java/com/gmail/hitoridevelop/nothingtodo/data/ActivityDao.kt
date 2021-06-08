@@ -15,7 +15,7 @@ interface ActivityDao {
     suspend fun addActivity(activity: Activity)
 
     @Delete
-    fun deleteActivity(activity: Activity)
+    suspend fun deleteActivity(activity: Activity)
 
     @Query("SELECT * FROM activities")
     fun getActivities(): LiveData<List<Activity>>

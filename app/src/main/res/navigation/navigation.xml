@@ -23,4 +23,8 @@
             android:id="@+id/action_showActivityFragment_to_suggestActivityFragment"
             app:destination="@id/suggestActivityFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/doLaterActivitiesFragment"
+        android:name="com.gmail.hitoridevelop.nothingtodo.fragments.DoLaterActivitiesFragment"
+        android:label="DoLaterActivitiesFragment" />
 </navigation>

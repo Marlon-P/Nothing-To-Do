@@ -53,5 +53,6 @@
     <string name="activities_to_do">Activities to Do</string>
     <string name="finished_activities">Finished Activities</string>
     <string name="home">Home</string>
+    <string name="list_item_placeholder">Recreation</string>
 
 </resources>

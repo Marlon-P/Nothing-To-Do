@@ -8,7 +8,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class ActivityViewModel(application: Application): AndroidViewModel(application) {
-    private val getActivities: LiveData<List<Activity>>
+    val getActivities: LiveData<List<Activity>>
     private val repository: ActivityRepository
 
     init {
@@ -20,6 +20,12 @@ class ActivityViewModel(application: Application): AndroidViewModel(application)
     fun addActivity(activity: Activity) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.addActivity(activity)
+        }
+    }
+
+    fun deleteActivity(activity: Activity) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.deleteActivity(activity)
         }
     }
 

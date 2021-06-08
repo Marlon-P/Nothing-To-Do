@@ -2,9 +2,9 @@ package com.gmail.hitoridevelop.nothingtodo
 
 import android.os.Bundle
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.findNavController
 import com.gmail.hitoridevelop.nothingtodo.databinding.ActivityMainBinding
 import com.google.android.material.navigation.NavigationView
 
@@ -41,13 +41,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         when (item.itemId) {
             R.id.home -> {
                 binding.drawerLayout.closeDrawers()
+                binding.myNavHostFragment.findNavController().navigate(R.id.suggestActivityFragment)
             }
             R.id.activities_to_do -> {
-                Toast.makeText(this, "Do Activity", Toast.LENGTH_SHORT).show()
                 binding.drawerLayout.closeDrawers()
+                binding.myNavHostFragment.findNavController().navigate(R.id.doLaterActivitiesFragment)
             }
             R.id.completed_activities -> {
-                Toast.makeText(this, "Finished Activities", Toast.LENGTH_SHORT).show()
                 binding.drawerLayout.closeDrawers()
 
             }

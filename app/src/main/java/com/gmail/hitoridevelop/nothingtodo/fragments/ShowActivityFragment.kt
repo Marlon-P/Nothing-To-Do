@@ -21,6 +21,7 @@ class ShowActivityFragment : Fragment() {
     private lateinit var binding: FragmentShowActivityBinding
     private lateinit var activityViewModel: ActivityViewModel
     private lateinit var result: Array<String>
+    private lateinit var action: Activity
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -67,18 +68,36 @@ class ShowActivityFragment : Fragment() {
     private fun insertDataToDatabase() {
                               //Activity name, activity type, accessibility range, participants, price range
         val activity = Activity(result[0], result[1], result[2], result[3], result[4])
+        action = activity
         activityViewModel.addActivity(activity)
+    }
+
+    private fun deleteActivity(activity: Activity) {
+        activityViewModel.deleteActivity(activity)
     }
 
     private fun undoAddSnackBar(v: View) {
         context?.let {
-            Snackbar.make(it, v, "Saved Activity For Later", Snackbar.LENGTH_SHORT)
-            .setDuration(5000)
+            Snackbar.make(it, v, "Saved Activity For Later", Snackbar.LENGTH_INDEFINITE)
             .setAction("UNDO") {
-                binding.saveForLaterBtn.isClickable = true
+               undoDialog()
             }
             .show()
         }
+    }
+
+    private fun undoDialog() {
+        val builder = context?.let { AlertDialog.Builder(it) }
+        builder?.setMessage("Are you sure you want to remove this activity?")
+            ?.setPositiveButton("REMOVE") { _, _ ->
+                binding.saveForLaterBtn.isClickable = true
+                deleteActivity(action)
+            }
+            ?.setNegativeButton("Cancel") { _, _ ->
+
+            }
+            ?.create()
+            ?.show()
     }
 
 }
