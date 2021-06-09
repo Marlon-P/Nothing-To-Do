@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.gmail.hitoridevelop.nothingtodo.R
@@ -29,6 +30,9 @@ class CompletedActivitiesFragment : Fragment() {
 
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(context)
+
+        val divider = DividerItemDecoration(context, LinearLayoutManager.HORIZONTAL)
+        recyclerView.addItemDecoration(divider)
 
         activityViewModel = ViewModelProvider(this).get(ActivityViewModel::class.java)
         activityViewModel.getFinishedActivities.observe(viewLifecycleOwner, { list ->

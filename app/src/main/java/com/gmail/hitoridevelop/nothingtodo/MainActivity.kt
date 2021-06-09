@@ -15,13 +15,15 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     //[DONE] add are you sure dialog for saving data
     //[DONE] add snack bar when finishing save and add undo function
     //[DONE] show list of saved activities when clicking the saved folder icon
-    //TODO add loading screen when querying api
-    //TODO add button to complete activity
+    //[DONE] add loading screen when querying api
+    //[DONE] add button to complete activity and SnackBar to undo complete
     //[DONE] add function to get completed activities and unfinished activities
     //[DONE] add fragment that shows list of completed activities
-    //TODO add a filter to the saved activities
     //TODO add testing
-    lateinit var binding: ActivityMainBinding
+    //TODO add swipe to complete and swipe to delete
+    //TODO add night mode
+    //TODO deal with configuration changes
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

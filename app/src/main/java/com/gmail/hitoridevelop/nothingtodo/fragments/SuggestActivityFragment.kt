@@ -13,6 +13,7 @@ import com.gmail.hitoridevelop.nothingtodo.R
 import com.gmail.hitoridevelop.nothingtodo.api.BoredApi
 import com.gmail.hitoridevelop.nothingtodo.api.BoredApiResponse
 import com.gmail.hitoridevelop.nothingtodo.databinding.FragmentSuggestActivityBinding
+import com.gmail.hitoridevelop.nothingtodo.dialogs.LoadingDialog
 import kotlinx.coroutines.*
 import kotlin.random.Random
 
@@ -29,13 +30,14 @@ class SuggestActivityFragment : Fragment(), AdapterView.OnItemSelectedListener  
     lateinit var price: String
 
     lateinit var response: BoredApiResponse
-
+    lateinit var dialog: LoadingDialog
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
 
+        dialog = LoadingDialog(requireActivity())
         binding = FragmentSuggestActivityBinding.inflate(inflater)
         // Type of Activity spinner
         context?.let {
@@ -191,6 +193,7 @@ class SuggestActivityFragment : Fragment(), AdapterView.OnItemSelectedListener  
 
 
             uiScope.launch {
+                dialog.startLoadingDialog()
                 withContext(Dispatchers.IO) {
                     //Do background tasks...
                     try {
@@ -205,11 +208,12 @@ class SuggestActivityFragment : Fragment(), AdapterView.OnItemSelectedListener  
 
 
                     } catch (e: Exception) {
+                        dialog.dismissDialog()
                         println(e.message)
                     }
                     withContext(Dispatchers.Main){
                         //println(response.toString())
-
+                        dialog.dismissDialog()
                         val activityArray = arrayOf(response.activity, response.type, accessibility, participants, price)
                         val bundle = bundleOf("bundleKey" to activityArray)
 

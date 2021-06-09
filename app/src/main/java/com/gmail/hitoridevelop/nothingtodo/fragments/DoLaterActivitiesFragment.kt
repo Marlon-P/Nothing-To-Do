@@ -29,7 +29,7 @@ class DoLaterActivitiesFragment : Fragment(){
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(context)
 
-        val divider = DividerItemDecoration(context, (recyclerView.layoutManager as LinearLayoutManager).layoutDirection)
+        val divider = DividerItemDecoration(context, LinearLayoutManager.HORIZONTAL)
         recyclerView.addItemDecoration(divider)
 
         activityViewModel = ViewModelProvider(this).get(ActivityViewModel::class.java)
