@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     //[DONE] add function to get completed activities and unfinished activities
     //[DONE] add fragment that shows list of completed activities
     //TODO add testing
-    //TODO add swipe to complete and swipe to delete
+    //[DONE] add swipe to complete and swipe to delete
     //TODO add night mode
     //TODO deal with configuration changes
     private lateinit var binding: ActivityMainBinding

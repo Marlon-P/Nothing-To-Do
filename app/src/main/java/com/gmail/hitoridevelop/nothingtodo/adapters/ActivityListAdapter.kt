@@ -1,22 +1,19 @@
 package com.gmail.hitoridevelop.nothingtodo.adapters
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
 import androidx.recyclerview.widget.RecyclerView
 import com.gmail.hitoridevelop.nothingtodo.R
 import com.gmail.hitoridevelop.nothingtodo.data.Activity
 import com.gmail.hitoridevelop.nothingtodo.data.ActivityViewModel
-import com.google.android.material.snackbar.Snackbar
 
 class ActivityListAdapter(private val viewModelOwner: ViewModelStoreOwner) : RecyclerView.Adapter<ActivityListAdapter.ViewHolder>(){
 
-    private var activityList = emptyList<Activity>()
+    private var activityList =mutableListOf<Activity>()
     private lateinit var viewModel: ActivityViewModel
 
 
@@ -38,12 +35,7 @@ class ActivityListAdapter(private val viewModelOwner: ViewModelStoreOwner) : Rec
         val currentItem = activityList[position]
         holder.textView.text = currentItem.name
 
-        val completed = currentItem.completed
-        holder.itemView.setOnClickListener{
-           if (currentItem.completed == 0) {
-               updateActivityDialog(completed, it.context, currentItem, it)
-           }
-        }
+
     }
 
     override fun getItemCount(): Int {
@@ -51,49 +43,23 @@ class ActivityListAdapter(private val viewModelOwner: ViewModelStoreOwner) : Rec
     }
 
     fun setData(actions: List<Activity>) {
-        activityList = actions
+        activityList = actions as MutableList<Activity>
         notifyDataSetChanged()
     }
 
-    private fun updateActivityDialog(finished: Int, context: Context, activity: Activity, v: View) {
-        val builder = context.let { AlertDialog.Builder(it) }
-        builder.setMessage("Complete Activity?")
-            .setPositiveButton("Complete") { _, _ ->
-                val action = Activity(activity.name, activity.type, activity.accessibilityRange,
-                    activity.participantRange, activity.priceRange, 1)
-                viewModel.updateActivity(action)
-                undoUpdateSnackBar(v, action)
-            }
-            .setNegativeButton("Cancel") { _, _ ->
-
-            }
-            .create()
-            .show()
-
+    fun getData(): List<Activity> {
+        return activityList
     }
 
-    private fun undoUpdateSnackBar(v: View, action: Activity) {
-        v.context?.let { context ->
-            Snackbar.make(context, v, "Saved Activity For Later", Snackbar.LENGTH_INDEFINITE)
-                .setAction("UNDO") {
-                    undoUpdateDialog(context, action)
-                }
-                .show()
-        }
+    fun remove(position: Int): Activity {
+        val item = activityList.removeAt(position)
+        notifyItemRemoved(position)
+        return item
     }
 
-    private fun undoUpdateDialog(context: Context, action: Activity) {
-        val builder = context.let { AlertDialog.Builder(it) }
-        builder.setMessage("Are you sure you want to undo this action?")
-            ?.setPositiveButton("UNDO") { _, _ ->
-                action.completed = 0
-                viewModel.updateActivity(action)
-            }
-            ?.setNegativeButton("Cancel") { _, _ ->
-
-            }
-            ?.create()
-            ?.show()
+    fun add(act: Activity, position: Int) {
+        activityList.add(position, act)
+        notifyItemInserted(position)
     }
 
 }
