@@ -37,7 +37,8 @@ class ShowActivityFragment : Fragment() {
         binding.textView.text = result[0]
 
         binding.suggestNewActivityBtn.setOnClickListener {
-            view?.findNavController()?.navigate(R.id.action_showActivityFragment_to_suggestActivityFragment)
+            view?.findNavController()
+                ?.navigate(R.id.action_showActivityFragment_to_suggestActivityFragment)
         }
 
         binding.saveForLaterBtn.setOnClickListener {
@@ -66,8 +67,15 @@ class ShowActivityFragment : Fragment() {
     }
 
     private fun insertDataToDatabase() {
-                              //Activity name, activity type, accessibility range, participants, price range
-        val activity = Activity(result[0], result[1], result[2], result[3], result[4], 0)//at first activity is not completed and if added will be added to do later list
+        //Activity name, activity type, accessibility range, participants, price range
+        val activity = Activity(
+            result[0],
+            result[1],
+            result[2],
+            result[3],
+            result[4],
+            0
+        )//at first activity is not completed and if added will be added to do later list
         action = activity
         activityViewModel.addActivity(activity)
     }
@@ -78,11 +86,12 @@ class ShowActivityFragment : Fragment() {
 
     private fun undoAddSnackBar(v: View) {
         context?.let {
-            Snackbar.make(it, v, "Saved Activity For Later", Snackbar.LENGTH_INDEFINITE)
-            .setAction("UNDO") {
-               undoDialog()
-            }
-            .show()
+            Snackbar.make(it, v, "Saved Activity For Later", Snackbar.LENGTH_SHORT)
+                .setDuration(5000)
+                .setAction("UNDO") {
+                    undoDialog()
+                }
+                .show()
         }
     }
 

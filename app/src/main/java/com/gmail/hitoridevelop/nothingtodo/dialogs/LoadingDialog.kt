@@ -13,7 +13,8 @@ class LoadingDialog(val activity: Activity) {
     fun startLoadingDialog() {
         val builder = AlertDialog.Builder(activity)
 
-        builder.setView(View.inflate(activity.applicationContext, R.layout.progress_bar, null))
+        builder.setView(View.inflate(activity.applicationContext, R.layout.progress_bar,
+            activity.findViewById(R.id.progress_bar_root)))
         builder.setCancelable(true)
 
         dialog = builder.create()
