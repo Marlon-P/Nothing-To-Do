@@ -23,6 +23,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     //[DONE] add fragment that shows list of completed activities
     //TODO add testing
     //[DONE] add swipe to complete and swipe to delete
+    //TODO add swipe to delete for completed activities
     //TODO add night mode
     //TODO deal with configuration changes
     private lateinit var binding: ActivityMainBinding
@@ -53,12 +54,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater = menuInflater
+
         inflater.inflate(R.menu.action_bar_menu, menu)
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean  = when (item.itemId) {
         R.id.day_night_mode -> {
+            //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
             Toast.makeText(this, "menu item selected", Toast.LENGTH_SHORT).show()
             true
         }

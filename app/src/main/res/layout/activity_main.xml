@@ -32,6 +32,7 @@
            app:layout_constraintTop_toTopOf="parent"
            android:background="@color/purple_500"
            app:titleTextColor="@color/white"
+           app:menu="@menu/action_bar_menu"
            android:elevation="4dp"
            app:title="@string/nothing_to_do"
            app:navigationIcon="@drawable/menu"/>

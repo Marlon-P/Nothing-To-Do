@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     tools:context=".MainActivity"
+    android:background="@color/design_default_color_on_primary"
     >
 
 
@@ -27,6 +28,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/type_of_activity"
+        android:textColor="@color/design_default_color_on_secondary"
         android:textSize="30sp"
         app:layout_constraintStart_toStartOf="@+id/verticalGuideline"
         app:layout_constraintTop_toBottomOf="@id/horizontalGuideline" />
@@ -36,6 +38,7 @@
         android:layout_width="409dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
+        android:textColor="@color/design_default_color_on_secondary"
         app:layout_constraintStart_toStartOf="@id/verticalGuideline"
         app:layout_constraintTop_toBottomOf="@+id/activityTypeTextView"
         tools:layout_editor_absoluteX="1dp" />
@@ -46,6 +49,7 @@
         android:layout_height="wrap_content"
         android:text="@string/accessibility"
         android:textSize="30sp"
+        android:textColor="@color/design_default_color_on_secondary"
         app:layout_constraintStart_toStartOf="@+id/verticalGuideline"
         app:layout_constraintTop_toBottomOf="@id/activitySpinner" />
 
@@ -63,6 +67,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/participants"
+        android:textColor="@color/design_default_color_on_secondary"
         android:textSize="30sp"
         app:layout_constraintStart_toStartOf="@+id/verticalGuideline"
         app:layout_constraintTop_toBottomOf="@id/accessibilitySpinner" />
@@ -82,6 +87,7 @@
         android:layout_height="wrap_content"
         android:text="@string/price"
         android:textSize="30sp"
+        android:textColor="@color/design_default_color_on_secondary"
         app:layout_constraintStart_toStartOf="@+id/verticalGuideline"
         app:layout_constraintTop_toBottomOf="@id/participantsSpinner" />
 
