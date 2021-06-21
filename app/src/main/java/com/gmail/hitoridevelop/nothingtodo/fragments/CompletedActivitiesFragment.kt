@@ -22,8 +22,8 @@ class CompletedActivitiesFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_activity_list, container, false)
 
+        val view = inflater.inflate(R.layout.fragment_activity_list, container, false)
         val recyclerView = view.findViewById<RecyclerView>(R.id.activity_list_rv)
         val adapter = ActivityListAdapter(this)
 

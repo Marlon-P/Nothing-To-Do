@@ -35,13 +35,14 @@ class DoLaterActivitiesFragment : Fragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
         v = inflater.inflate(R.layout.fragment_activity_list, container, false)
         initRecyclerView(v)
         return v
     }
 
     private fun initRecyclerView(view: View) {
-        recyclerView = view.findViewById<RecyclerView>(R.id.activity_list_rv)
+        recyclerView = view.findViewById(R.id.activity_list_rv)
         adapter = ActivityListAdapter(this)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(context)

@@ -55,5 +55,7 @@
     <string name="home">Home</string>
     <string name="list_item_placeholder">Recreation</string>
     <string name="loading">Loading…</string>
+    <string name="complete_activities">Completed Activities</string>
+    <string name="day_night_mode_toggle">Night Mode</string>
 
 </resources>
