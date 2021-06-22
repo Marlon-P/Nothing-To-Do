@@ -1,14 +1,16 @@
 package com.gmail.hitoridevelop.nothingtodo
 
+
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.findNavController
 import com.gmail.hitoridevelop.nothingtodo.databinding.ActivityMainBinding
 import com.google.android.material.navigation.NavigationView
+
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -37,18 +39,19 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         binding.navView.bringToFront()
         binding.navView.setNavigationItemSelectedListener(this)
 
-        setUpToolBar(binding.toolbar)
-
+        setUpToolBar()
 
 
     }
 
-    private fun setUpToolBar(toolbar: androidx.appcompat.widget.Toolbar) {
+    private fun setUpToolBar() {
         //every time you change the title of the toolbar you have to setup the drawer toggle as well
         //otherwise you can't navigate back home
         setSupportActionBar(binding.toolbar)
-        val toggle = ActionBarDrawerToggle(this, binding.drawerLayout, binding.toolbar,
-            R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+        val toggle = ActionBarDrawerToggle(
+            this, binding.drawerLayout, binding.toolbar,
+            R.string.navigation_drawer_open, R.string.navigation_drawer_close
+        )
         binding.drawerLayout.addDrawerListener(toggle)
     }
 
@@ -56,13 +59,26 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val inflater = menuInflater
 
         inflater.inflate(R.menu.action_bar_menu, menu)
+
         return true
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean  = when (item.itemId) {
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
         R.id.day_night_mode -> {
-            //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-            Toast.makeText(this, "menu item selected", Toast.LENGTH_SHORT).show()
+            when (item.title) {
+                "Day Mode" -> {
+                    delegate.localNightMode = AppCompatDelegate.MODE_NIGHT_NO
+                    item.title = "Night Mode"
+                    println("night mode off")
+                }
+                "Night Mode" -> {
+                    delegate.localNightMode = AppCompatDelegate.MODE_NIGHT_YES
+                    item.title = "Day Mode"
+                    println("night mode on")
+                }
+
+            }
             true
         }
         else -> {
@@ -74,27 +90,28 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         when (item.itemId) {
             R.id.home -> {
                 binding.toolbar.setTitle(R.string.app_name)
-                setUpToolBar(binding.toolbar)
+                setUpToolBar()
                 binding.myNavHostFragment.findNavController().navigate(R.id.suggestActivityFragment)
                 binding.drawerLayout.closeDrawers()
             }
             R.id.activities_to_do -> {
                 binding.toolbar.setTitle(R.string.activities_to_do)
-                setUpToolBar(binding.toolbar)
-                binding.myNavHostFragment.findNavController().navigate(R.id.doLaterActivitiesFragment)
+                setUpToolBar()
+                binding.myNavHostFragment.findNavController()
+                    .navigate(R.id.doLaterActivitiesFragment)
                 binding.drawerLayout.closeDrawers()
 
             }
             R.id.completed_activities -> {
                 binding.toolbar.setTitle(R.string.complete_activities)
-                setUpToolBar(binding.toolbar)
-                binding.myNavHostFragment.findNavController().navigate(R.id.completedActivitiesFragment)
+                setUpToolBar()
+                binding.myNavHostFragment.findNavController()
+                    .navigate(R.id.completedActivitiesFragment)
                 binding.drawerLayout.closeDrawers()
             }
         }
         return true
     }
-
 
 
 }
