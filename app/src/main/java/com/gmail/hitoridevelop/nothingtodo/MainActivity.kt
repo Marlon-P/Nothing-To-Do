@@ -1,6 +1,7 @@
 package com.gmail.hitoridevelop.nothingtodo
 
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.view.Menu
@@ -29,9 +30,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     //[DONE[ add swipe to delete for completed activities
     //[DONE] add night mode
     //[DONE] save night mode in shared preferences
-    //TODO add landscape mode
-    //TODO add more seamless transition to night mode, there's a bug where it takes two clicks to switch back to day mode
-    //TODO deal with configuration changes
+    //[DONE] add landscape mode
+    //[DONE] add more seamless transition to night mode, there's a bug where it takes two clicks to switch back to day mode
     //TODO handle case when there is no internet
     private lateinit var binding: ActivityMainBinding
 
@@ -39,12 +39,15 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private val preferences by lazy { getSharedPreferences(key, Context.MODE_PRIVATE) }
     private val mode = "day_night_mode"
 
+    private var dayNightModeMenu: Menu? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setupNightMode()
+        setupDayNightMode()
+
 
         binding.navView.bringToFront()
         binding.navView.setNavigationItemSelectedListener(this)
@@ -55,21 +58,26 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     }
 
-    private fun setupNightMode() {
+    @SuppressLint("UseCompatLoadingForDrawables")
+    private fun setupDayNightMode() {
 
         if (!preferences.contains(mode)) {
             with(preferences.edit()) {
                 putString(mode, "Day")
                 delegate.localNightMode = AppCompatDelegate.MODE_NIGHT_NO
-                apply()
+                apply()//if its in day mode, the icon should be a moon to indicate toggle to night
+
+
             }
         } else {
-            when (preferences.getString(mode, "Day")) {
+            when (preferences.getString(mode, "Night")) {
                 "Day" -> {
                     delegate.localNightMode = AppCompatDelegate.MODE_NIGHT_NO
+
                 }
                 else -> {
                     delegate.localNightMode = AppCompatDelegate.MODE_NIGHT_YES
+
                 }
             }
         }
@@ -87,34 +95,40 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+
         val inflater = menuInflater
-
         inflater.inflate(R.menu.action_bar_menu, menu)
+        when (preferences.getString(mode, "Day")) {
+            "Night" -> {
+                println("night mode on")
+                menu?.findItem(R.id.day_night_mode)?.setIcon(R.drawable.day_mode_icon)
+            }
+            else -> {
+                println("day mode on")
+                menu?.findItem(R.id.day_night_mode)?.setIcon(R.drawable.night_mode_icon)
+            }
 
+        }
         return true
     }
 
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
         R.id.day_night_mode -> {
-            when (item.title) {
-                "Day Mode" -> {
+            when (preferences.getString(mode, "Day")) {
+                "Night" -> {
                     delegate.localNightMode = AppCompatDelegate.MODE_NIGHT_NO
-                    item.title = "Night Mode"
                     with(preferences.edit()) {
                         putString(mode, "Day")//change current mode to day
                         apply()
                     }
-
                 }
-                "Night Mode" -> {
+                else -> {
                     delegate.localNightMode = AppCompatDelegate.MODE_NIGHT_YES
-                    item.title = "Day Mode"
                     with(preferences.edit()) {
                         putString(mode, "Night")
                         apply()
                     }
-
                 }
 
             }

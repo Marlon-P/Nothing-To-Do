@@ -30,7 +30,7 @@
            app:layout_constraintEnd_toEndOf="parent"
            app:layout_constraintStart_toStartOf="parent"
            app:layout_constraintTop_toTopOf="parent"
-           android:background="@color/purple_500"
+           android:background="?attr/colorPrimary"
            app:titleTextColor="@color/white"
            app:menu="@menu/action_bar_menu"
            android:elevation="4dp"
