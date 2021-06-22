@@ -26,11 +26,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     //[DONE] add fragment that shows list of completed activities
     //TODO add testing
     //[DONE] add swipe to complete and swipe to delete
-    //TODO add swipe to delete for completed activities
+    //[DONE[ add swipe to delete for completed activities
     //[DONE] add night mode
     //[DONE] save night mode in shared preferences
+    //TODO add landscape mode
     //TODO add more seamless transition to night mode, there's a bug where it takes two clicks to switch back to day mode
     //TODO deal with configuration changes
+    //TODO handle case when there is no internet
     private lateinit var binding: ActivityMainBinding
 
     private val key = "activities"
@@ -100,10 +102,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     delegate.localNightMode = AppCompatDelegate.MODE_NIGHT_NO
                     item.title = "Night Mode"
                     with(preferences.edit()) {
-                        putString(mode, "Day")//current mode is day
+                        putString(mode, "Day")//change current mode to day
                         apply()
                     }
-                    println("night mode off")
+
                 }
                 "Night Mode" -> {
                     delegate.localNightMode = AppCompatDelegate.MODE_NIGHT_YES
@@ -112,7 +114,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                         putString(mode, "Night")
                         apply()
                     }
-                    println("night mode on")
+
                 }
 
             }

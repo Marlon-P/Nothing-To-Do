@@ -1,6 +1,7 @@
 package com.gmail.hitoridevelop.nothingtodo.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,7 +30,7 @@ class SuggestActivityFragment : Fragment(), AdapterView.OnItemSelectedListener  
     lateinit var participants: String
     lateinit var price: String
 
-    lateinit var response: BoredApiResponse
+    private var response = BoredApiResponse("NO INTERNET", 0.0, "null", 0, 0.0, 122, "null")
     lateinit var dialog: LoadingDialog
 
     override fun onCreateView(
@@ -209,7 +210,8 @@ class SuggestActivityFragment : Fragment(), AdapterView.OnItemSelectedListener  
 
                     } catch (e: Exception) {
                         dialog.dismissDialog()
-                        println(e.message)
+                        println("${e.message} NO INTERNET BOYS")
+                        Log.d("suggestActivityFragment", "error no internet or other exception")
                     }
                     withContext(Dispatchers.Main){
                         //println(response.toString())
