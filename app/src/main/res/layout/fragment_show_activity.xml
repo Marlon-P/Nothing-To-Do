@@ -3,12 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.ShowActivityFragment">
+    tools:context=".fragments.ShowActivityFragment"
+    style="@style/Theme.NothingToDo">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:app="http://schemas.android.com/apk/res-auto"
-
+        style="@style/Theme.NothingToDo"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -18,7 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="212dp"
             android:text="@string/read_a_novel"
-            android:textColor="@color/black"
+            style="@style/Theme.NothingToDo"
             android:textSize="40sp"
             android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"

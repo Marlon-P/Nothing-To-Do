@@ -1,6 +1,7 @@
 package com.gmail.hitoridevelop.nothingtodo
 
 
+import android.content.Context
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -26,22 +27,50 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     //TODO add testing
     //[DONE] add swipe to complete and swipe to delete
     //TODO add swipe to delete for completed activities
-    //TODO add night mode
+    //[DONE] add night mode
+    //[DONE] save night mode in shared preferences
+    //TODO add more seamless transition to night mode, there's a bug where it takes two clicks to switch back to day mode
     //TODO deal with configuration changes
     private lateinit var binding: ActivityMainBinding
+
+    private val key = "activities"
+    private val preferences by lazy { getSharedPreferences(key, Context.MODE_PRIVATE) }
+    private val mode = "day_night_mode"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setupNightMode()
 
         binding.navView.bringToFront()
         binding.navView.setNavigationItemSelectedListener(this)
 
+
         setUpToolBar()
 
 
+    }
+
+    private fun setupNightMode() {
+
+        if (!preferences.contains(mode)) {
+            with(preferences.edit()) {
+                putString(mode, "Day")
+                delegate.localNightMode = AppCompatDelegate.MODE_NIGHT_NO
+                apply()
+            }
+        } else {
+            when (preferences.getString(mode, "Day")) {
+                "Day" -> {
+                    delegate.localNightMode = AppCompatDelegate.MODE_NIGHT_NO
+                }
+                else -> {
+                    delegate.localNightMode = AppCompatDelegate.MODE_NIGHT_YES
+                }
+            }
+        }
     }
 
     private fun setUpToolBar() {
@@ -70,11 +99,19 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 "Day Mode" -> {
                     delegate.localNightMode = AppCompatDelegate.MODE_NIGHT_NO
                     item.title = "Night Mode"
+                    with(preferences.edit()) {
+                        putString(mode, "Day")//current mode is day
+                        apply()
+                    }
                     println("night mode off")
                 }
                 "Night Mode" -> {
                     delegate.localNightMode = AppCompatDelegate.MODE_NIGHT_YES
                     item.title = "Day Mode"
+                    with(preferences.edit()) {
+                        putString(mode, "Night")
+                        apply()
+                    }
                     println("night mode on")
                 }
 
