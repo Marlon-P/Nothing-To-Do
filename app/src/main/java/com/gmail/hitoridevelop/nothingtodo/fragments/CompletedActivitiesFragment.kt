@@ -48,6 +48,8 @@ class CompletedActivitiesFragment : Fragment() {
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(context)
 
+
+        //putting it to LinearLayoutManager.HORIZONTAL makes a line on the whole screen when swiping on an RV item
         val divider = DividerItemDecoration(context, LinearLayoutManager.VERTICAL)
         recyclerView.addItemDecoration(divider)
 
