@@ -25,21 +25,20 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     //[DONE] add button to complete activity and SnackBar to undo complete
     //[DONE] add function to get completed activities and unfinished activities
     //[DONE] add fragment that shows list of completed activities
-    //TODO add testing
     //[DONE] add swipe to complete and swipe to delete
     //[DONE[ add swipe to delete for completed activities
     //[DONE] add night mode
     //[DONE] save night mode in shared preferences
     //[DONE] add landscape mode
     //[DONE] add more seamless transition to night mode, there's a bug where it takes two clicks to switch back to day mode
-    //TODO handle case when there is no internet
+    //[DONE] handle case when there is no internet
+    //TODO add testing
+    //TODO add do again button to completed activities fragment
     private lateinit var binding: ActivityMainBinding
 
     private val key = "activities"
     private val preferences by lazy { getSharedPreferences(key, Context.MODE_PRIVATE) }
     private val mode = "day_night_mode"
-
-    private var dayNightModeMenu: Menu? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

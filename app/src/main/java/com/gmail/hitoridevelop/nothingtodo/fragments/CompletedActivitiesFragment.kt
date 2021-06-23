@@ -48,7 +48,7 @@ class CompletedActivitiesFragment : Fragment() {
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(context)
 
-        val divider = DividerItemDecoration(context, LinearLayoutManager.HORIZONTAL)
+        val divider = DividerItemDecoration(context, LinearLayoutManager.VERTICAL)
         recyclerView.addItemDecoration(divider)
 
         activityViewModel = ViewModelProvider(this).get(ActivityViewModel::class.java)
@@ -59,7 +59,8 @@ class CompletedActivitiesFragment : Fragment() {
         val itemTouchHelper = ItemTouchHelper(object: SwipeHelper(recyclerView){
             override fun instantiateUnderlayButton(position: Int): List<UnderlayButton> {
                 val action = adapter.getData()[position]
-                return listOf(deleteButton(requireContext() , action, v, "Delete", position))
+                return listOf(deleteButton(requireContext() , action, v, "Delete", position)
+                    , doAgainButton(requireContext(), action, v, "Update", position))
             }
         })
 
@@ -78,7 +79,7 @@ class CompletedActivitiesFragment : Fragment() {
         var action = activity
 
         message = when (dataBaseAction) {
-            "Update" -> "Complete Activity?"
+            "Update" -> "Move Activity?"
             else -> "Delete Activity?"
 
         }
@@ -87,7 +88,7 @@ class CompletedActivitiesFragment : Fragment() {
                 when (dataBaseAction) {
                     "Update" -> {
                         action = Activity(activity.name, activity.type, activity.accessibilityRange,
-                            activity.participantRange, activity.priceRange, 1)
+                            activity.participantRange, activity.priceRange, 0)
                         activityViewModel.updateActivity(action)
                     }
                     else -> {//don't actually delete the activity from the db until the undo snackBar is dismissed
@@ -107,7 +108,7 @@ class CompletedActivitiesFragment : Fragment() {
     @SuppressLint("ShowToast")
     private fun undoDatabaseActionSnackBar(v: View, action: Activity, dataBaseAction: String, position: Int) {
         val message = when(dataBaseAction) {
-            "Update" -> "Completed Activity"
+            "Update" -> "Moved Activity"
             else -> "Deleted Activity"
         }
 
@@ -117,7 +118,7 @@ class CompletedActivitiesFragment : Fragment() {
                 .setAction("UNDO") {
                     when (dataBaseAction) {
                         "Update" -> {
-                            action.completed = 0
+                            action.completed = 1
                             activityViewModel.updateActivity(action)
                         }
                         else -> {
@@ -134,6 +135,24 @@ class CompletedActivitiesFragment : Fragment() {
                 })
                 .show()
         }
+    }
+
+    private fun doAgainButton(
+        context: Context,
+        action: Activity,
+        view: View,
+        dataBaseAction: String,
+        position: Int): SwipeHelper.UnderlayButton {
+        return SwipeHelper.UnderlayButton(
+            context,
+            "Do Again",
+            14.0f,
+            android.R.color.holo_green_light,
+            object : SwipeHelper.UnderlayButtonClickListener {
+                override fun onClick() {
+                    databaseActionDialog(context, action, view, dataBaseAction, position)
+                }
+            })
     }
 
     private fun deleteButton(
