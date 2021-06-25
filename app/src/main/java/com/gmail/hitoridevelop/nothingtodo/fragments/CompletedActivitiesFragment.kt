@@ -41,8 +41,8 @@ class CompletedActivitiesFragment : Fragment() {
     }
 
     private fun initRecyclerView(view: View) {
-        recyclerView = view.findViewById<RecyclerView>(R.id.activity_list_rv)
-        adapter = ActivityListAdapter(this)
+        recyclerView = view.findViewById(R.id.activity_list_rv)
+        adapter = ActivityListAdapter()
 
 
         recyclerView.adapter = adapter
@@ -77,10 +77,9 @@ class CompletedActivitiesFragment : Fragment() {
         position: Int
     ) {
         val builder = context.let { AlertDialog.Builder(it) }
-        var message = ""
         var action = activity
 
-        message = when (dataBaseAction) {
+        val message: String = when (dataBaseAction) {
             "Update" -> "Move Activity?"
             else -> "Delete Activity?"
 

@@ -43,7 +43,7 @@ class DoLaterActivitiesFragment : Fragment(){
 
     private fun initRecyclerView(view: View) {
         recyclerView = view.findViewById(R.id.activity_list_rv)
-        adapter = ActivityListAdapter(this)
+        adapter = ActivityListAdapter()
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(context)
 
@@ -76,10 +76,9 @@ class DoLaterActivitiesFragment : Fragment(){
         position: Int
     ) {
         val builder = context.let { AlertDialog.Builder(it) }
-        var message = ""
         var action = activity
 
-        message = when (dataBaseAction) {
+        val message: String = when (dataBaseAction) {
             "Update" -> "Complete Activity?"
             else -> "Delete Activity?"
 

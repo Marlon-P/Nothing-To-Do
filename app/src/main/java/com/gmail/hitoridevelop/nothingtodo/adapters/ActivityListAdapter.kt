@@ -4,17 +4,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelStoreOwner
 import androidx.recyclerview.widget.RecyclerView
 import com.gmail.hitoridevelop.nothingtodo.R
 import com.gmail.hitoridevelop.nothingtodo.data.Activity
-import com.gmail.hitoridevelop.nothingtodo.data.ActivityViewModel
 
-class ActivityListAdapter(private val viewModelOwner: ViewModelStoreOwner) : RecyclerView.Adapter<ActivityListAdapter.ViewHolder>(){
+class ActivityListAdapter : RecyclerView.Adapter<ActivityListAdapter.ViewHolder>(){
 
-    private var activityList =mutableListOf<Activity>()
-    private lateinit var viewModel: ActivityViewModel
+    private var activityList = mutableListOf<Activity>()
+
 
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -27,7 +24,7 @@ class ActivityListAdapter(private val viewModelOwner: ViewModelStoreOwner) : Rec
         viewType: Int
     ): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.recycler_view_item, parent, false)
-        viewModel = ViewModelProvider(viewModelOwner).get(ActivityViewModel::class.java)
+
         return ViewHolder(view)
     }
 
